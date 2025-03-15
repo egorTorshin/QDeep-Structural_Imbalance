@@ -27,7 +27,6 @@ import dwave.inspector
 import dwave_networkx as dnx
 
 from neal import SimulatedAnnealingSampler
-from dwave.system import DWaveSampler, EmbeddingComposite, LeapHybridSampler
 
 from drawing import draw_social_network
 from mmp_network import global_signed_social_network
@@ -62,18 +61,6 @@ def main(sampler_type, region, show, inspect):
         params = dict(num_reads=100)
         sampler = SimulatedAnnealingSampler()
 
-    elif sampler_type == 'hybrid':
-        params = dict()
-        sampler = LeapHybridSampler()
-
-    elif sampler_type == 'qpu':
-        params = dict(num_reads=100,
-                      chain_strength=2.0,
-                      )
-        sampler = dimod.TrackingComposite(EmbeddingComposite(DWaveSampler()))
-
-    else:
-        raise RuntimeError("unknown solver type")
 
     # use the chosen sampler (passing in the parameters)
     edges, colors = dnx.structural_imbalance(G,
@@ -81,8 +68,6 @@ def main(sampler_type, region, show, inspect):
                                              label='Example - Structural Imbalance',
                                              **params)
 
-    if inspect and sampler_type == 'qpu':
-        dwave.inspector.show(sampler.output)
 
     print("Found", len(edges), 'violations out of', len(G.edges), 'edges')
 
