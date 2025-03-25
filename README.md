@@ -40,7 +40,7 @@ To run the demo, execute one of the following two commands:
 python structural_imbalance.py --cpu
 ```
 
-### B. D-Wave System Execution
+### B. QDeep System Execution
 
 ```bash
 python structural_imbalance.py --qpu
