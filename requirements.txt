@@ -1,4 +1,3 @@
-dwave-ocean-sdk>=3.0.0
+qdeepsdk
 click
 matplotlib>=3.3.4
-dwave-neal
